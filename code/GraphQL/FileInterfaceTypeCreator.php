@@ -69,6 +69,7 @@ class FileInterfaceTypeCreator extends DataObjectInterfaceTypeCreator
             'canDelete' => [
                 'type' => Type::boolean(),
             ],
+            'focalX' => [ 'type' => Type::int()],
         ];
     }
 

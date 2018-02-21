@@ -5,8 +5,11 @@ import AssetAdminRouter from 'containers/AssetAdmin/AssetAdminRouter';
 import applyTransform from 'boot/applyTransform';
 import registerReducers from 'boot/registerReducers';
 import registerComponents from 'boot/registerComponents';
+import registerQueries from 'boot/registerQueries';
 
 document.addEventListener('DOMContentLoaded', () => {
+  registerQueries();
+
   registerComponents();
 
   applyTransform();

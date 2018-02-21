@@ -2,20 +2,20 @@ import gql from 'graphql-tag';
 
 const fileInterface = gql`
   fragment FileInterfaceFields on FileInterface {
-    canDelete
-    canEdit
-    canView
-    category
-    exists
-    filename
-    id
-    lastEdited
-    name
-    parentId
-    title
-    type
-    url
-  }
+      canDelete
+      canEdit
+      canView
+      category
+      exists
+      filename
+      id
+      lastEdited
+      name
+      parentId
+      title
+      type
+      url
+}
 `;
 
 const file = gql`
