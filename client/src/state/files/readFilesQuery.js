@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import Injector from 'lib/Injector';
 import { hasFilters } from 'components/Search/Search';
@@ -91,12 +91,33 @@ const config = {
   },
 };
 
-const readFilesQuery = Component => function readFilesQueryHoc(props) {
-  const query = Injector.query.get('readFilesQuery');
-  const WrappedComponent = graphql(query, config)(Component);
-  return (
-    <WrappedComponent {...props} />
-  );
+const readFilesQuery = OrigComponent =>
+class QueryInjector extends Component {
+  constructor() {
+    super();
+    this.state = {
+      ready: false,
+      query: null,
+    };
+  }
+  componentDidMount() {
+    Injector.ready(() => {
+      const query = Injector.query.get('readFilesQuery', 'AssetAdmin');
+      this.setState({
+        ready: true,
+        query,
+      });
+    });
+  }
+  render() {
+    if (this.state.ready) {
+      const WrappedComponent = graphql(this.state.query, config)(OrigComponent);
+      return (
+        <WrappedComponent {...this.props} />
+      );
+    }
+    return null;
+  }
 };
 
 export { config };
